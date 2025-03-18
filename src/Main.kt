@@ -14,6 +14,16 @@
 
 
 fun main() {
-    println("Hello World!")
+    println("Welcome to the Old Gold Game!")
+    println()
+
+    var player1 = mutableListOf<String>()
+    println("Hello $player1, you are player 1")
+
+    var player2 = mutableListOf<String>()
+    println("Hello $player2, you are player 1")
+
+
+
 }
 
