@@ -13,17 +13,77 @@
 
 
 
+const val GAMESQUARES = 20      // The total number of squares
+const val NCOIN = "1"     // Represents a normal coin
+const val GCOIN = "5"     // Represents the gold coin
+const val EMPTY = ""     // Represents an empty square
+
 fun main() {
+
+
+
+    println("-------------------------------------------------------------")
     println("Welcome to the Old Gold Game!")
+    println("-------------------------------------------------------------")
     println()
 
-    var player1 = mutableListOf<String>()
-    println("Hello $player1, you are player 1")
 
-    var player2 = mutableListOf<String>()
-    println("Hello $player2, you are player 1")
+    println("Hello there player 1, please enter your name!")
+    val player1 = readln()
+    println("$player1, you are player 1")
+    println()
 
-
+    println("Hello there player 2, please enter your name!")
+    val player2 = readln()
+    println("$player2, you are player 2")
+    println()
 
 }
 
+fun setupSquare() {
+    val coins = setupSquare()
+}
+
+fun setupCages(): MutableList<String> {
+    val gameBoard = mutableListOf<String>()
+    for (i in 1..GAMESQUARES) gameBoard.add(EMPTY)
+    return gameBoard
+}
+
+
+
+fun theGameBoard(gameBoard: List<String>) {
+
+    println("+--------+--------+--------+--------+--------+--------+--------+--------+")
+    for (i in 0..gameBoard.size - 1) {
+        print("| Cage ${i + 1} ".padEnd(9))
+    }
+    println("|")
+    println("+--------+--------+--------+--------+--------+--------+--------+--------+")
+    for (i in 0..gameBoard.size - 1) {
+        print("| ${gameBoard[i]} ".padEnd(9))
+    }
+    println("|")
+    println("+--------+--------+--------+--------+--------+--------+--------+--------+")
+}
+
+
+
+
+
+
+
+fun showMonkeyCages(cageList: List<String>) {
+
+    println("+--------+--------+--------+--------+--------+--------+--------+--------+")
+    for (i in 0..cageList.size - 1) {
+        print("| Cage ${i + 1} ".padEnd(9))
+    }
+    println("|")
+    println("+--------+--------+--------+--------+--------+--------+--------+--------+")
+    for (i in 0..cageList.size - 1) {
+        print("| ${cageList[i]} ".padEnd(9))
+    }
+    println("|")
+    println("+--------+--------+--------+--------+--------+--------+--------+--------+")
+}
