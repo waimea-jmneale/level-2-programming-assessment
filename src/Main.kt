@@ -38,42 +38,50 @@ fun main() {
     println("$player2, you are player 2")
     println()
 
+
+
+    val square = ()
+
+
+    //-------------------------------------------------
+    println("Placing monkeys into cages...")
+
+    placeCoinInSquare(square, 1, "1")
+    placeCoinInSquare(square, 8, "1")
+    placeCoinInSquare(square, 4, "1")
+    placeCoinInSquare(square, 3, "1")
+    placeCoinInSquare(square, 5, "1")
+    placeCoinInSquare(square, 6, "5")
+
+
+    listAllMonkeysAndCages(square)
+    println()
+
+    showBoardSquares(square)
+    println()
+
+
 }
 
-fun setupSquare() {
-    val coins = setupSquare()
+fun placeCoinInSquare(cageList: MutableList<String>, cageNum: Int, name: String) {
+    println("Place a monkey in the cage: ")
+    println("+++ Putting $name into cage $cageNum")
+    cageList[cageNum - 1] = name
 }
 
-fun setupCages(): MutableList<String> {
-    val gameBoard = mutableListOf<String>()
-    for (i in 1..GAMESQUARES) gameBoard.add(EMPTY)
-    return gameBoard
-}
+fun listAllMonkeysAndCages(cageList: List<String>) {
+    println("MONKEYS & CAGES")
+    for (i in 0..cageList.size -1 ) {
+        if (cageList[i] != EMPTY){
+            println(cageList[i].padEnd(0))
+            println("Cage ${i + 1}")
+        }
 
-
-
-fun theGameBoard(gameBoard: List<String>) {
-
-    println("+--------+--------+--------+--------+--------+--------+--------+--------+")
-    for (i in 0..gameBoard.size - 1) {
-        print("| Cage ${i + 1} ".padEnd(9))
     }
-    println("|")
-    println("+--------+--------+--------+--------+--------+--------+--------+--------+")
-    for (i in 0..gameBoard.size - 1) {
-        print("| ${gameBoard[i]} ".padEnd(9))
-    }
-    println("|")
-    println("+--------+--------+--------+--------+--------+--------+--------+--------+")
 }
 
 
-
-
-
-
-
-fun showMonkeyCages(cageList: List<String>) {
+fun showBoardSquares(cageList: List<String>) {
 
     println("+--------+--------+--------+--------+--------+--------+--------+--------+")
     for (i in 0..cageList.size - 1) {
@@ -87,3 +95,6 @@ fun showMonkeyCages(cageList: List<String>) {
     println("|")
     println("+--------+--------+--------+--------+--------+--------+--------+--------+")
 }
+
+
+
