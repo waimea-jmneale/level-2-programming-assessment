@@ -11,12 +11,8 @@
  * =====================================================================
  */
 
-
-
-const val GAMESQUARES = 20      // The total number of squares
-const val NCOIN = "1"     // Represents a normal coin
-const val GCOIN = "5"     // Represents the gold coin
-const val EMPTY = ""     // Represents an empty square
+const val EMPTY = " ---"     // Represents an empty square
+const val NUMSQUARE = 20 // Number of squares
 
 fun main() {
 
@@ -38,63 +34,65 @@ fun main() {
     println("$player2, you are player 2")
     println()
 
-
-
-    val square = ()
-
+    val square = setupBoard()
+    val coin = mutableListOf<String>()
 
     //-------------------------------------------------
-    println("Placing monkeys into cages...")
-
-    placeCoinInSquare(square, 1, "1")
-    placeCoinInSquare(square, 8, "1")
-    placeCoinInSquare(square, 4, "1")
-    placeCoinInSquare(square, 3, "1")
-    placeCoinInSquare(square, 5, "1")
-    placeCoinInSquare(square, 6, "5")
-
-
-    listAllMonkeysAndCages(square)
+    printSquare(square)
     println()
 
-    showBoardSquares(square)
-    println()
+    showCoins(coin)
+    println(monkeyCounter(coin))
 
+    coin.add("Coin")
+    coin.add("Coin")
+    coin.add("Coin")
+    coin.add("Coin")
+    coin.add("Coin")
+    coin.add("Gold")
 
 }
 
-fun placeCoinInSquare(cageList: MutableList<String>, cageNum: Int, name: String) {
-    println("Place a monkey in the cage: ")
-    println("+++ Putting $name into cage $cageNum")
-    cageList[cageNum - 1] = name
+
+fun setupBoard(): MutableList<String> {
+    val squareList = mutableListOf<String>()
+    for (i in 1..NUMSQUARE) squareList.add(EMPTY)
+    return squareList
 }
 
-fun listAllMonkeysAndCages(cageList: List<String>) {
-    println("MONKEYS & CAGES")
-    for (i in 0..cageList.size -1 ) {
-        if (cageList[i] != EMPTY){
-            println(cageList[i].padEnd(0))
-            println("Cage ${i + 1}")
+fun showCoins(monkeyList: List<String>) {
+    println("Monkey List")
+    println("-------------------")
+
+    fun placeCoinInSquare(cageList: MutableList<String>, cageSquare: Int, coin: String) {
+        println("Putting $coin into cage $cageSquare")
+        cageList[cageSquare - 1] = coin
+    }
+
+    fun listAllMonkeysAndCages(cageList: List<String>) {
+        println("MONKEYS & CAGES")
+        for (i in 0..cageList.size - 1) {
+            if (cageList[i] != EMPTY) {
+                println(cageList[i].padEnd(0))
+                println("Cage ${i + 1}")
+            }
+
         }
+    }
 
+
+    fun printSquare(cageList: List<String>) {
+
+        println("+--------+--------+--------+--------+--------+--------+--------+--------+")
+        for (i in 0..cageList.size - 1) {
+            print("| ${i + 1} ".padEnd(9))
+        }
+        println("|")
+        println("+--------+--------+--------+--------+--------+--------+--------+--------+")
+        for (i in 0..cageList.size - 1) {
+            print("| ${cageList[i]} ".padEnd(9))
+        }
     }
 }
-
-
-fun showBoardSquares(cageList: List<String>) {
-
-    println("+--------+--------+--------+--------+--------+--------+--------+--------+")
-    for (i in 0..cageList.size - 1) {
-        print("| Cage ${i + 1} ".padEnd(9))
-    }
-    println("|")
-    println("+--------+--------+--------+--------+--------+--------+--------+--------+")
-    for (i in 0..cageList.size - 1) {
-        print("| ${cageList[i]} ".padEnd(9))
-    }
-    println("|")
-    println("+--------+--------+--------+--------+--------+--------+--------+--------+")
-}
-
 
 
