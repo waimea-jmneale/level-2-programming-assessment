@@ -36,29 +36,34 @@ fun main() {
     println("$player2, you are player 2")
     println()
 
-    val square = setupBoard()
-    val coin = mutableListOf<String>()
+    val coins = setupBoard()
+
 
     //-------------------------------------------------
 
-    coin.add("C")
-    coin.add("C")
-    coin.add("C")
-    coin.add("C")
-    coin.add("C")
-    coin.add("G")
+    coins.add("C")
+    coins.add("C")
+    coins.add("C")
+    coins.add("C")
+    coins.add("C")
+    coins.add("G")
 
-    showCoins(coin)
-    println((coin))
+    showCoins(coins)
+    println((coins))
 
-    printGameBox(square)
+    listAllCoins(coins)
+    coins.shuffle()
+
+    printGameBox(coins)
     println()
+
+
 
 }
 //
 fun setupBoard(): MutableList<String> {
     val squareList = mutableListOf<String>()
-    for (i in 1..NUMSQUARE) squareList.add(EMPTY)
+    for (i in 1..NUMSQUARE - 6) squareList.add(EMPTY)
     return squareList
 }
 //Show the players the coins they're playing with
@@ -67,21 +72,35 @@ fun showCoins(coinList: List<String>) {
     println("------------------------------------")
 }
 
-
-    fun printGameBox(cageList: List<String>) {
-
-        println("-----".repeat(20) + "+")
-        for (i in 0..cageList.size - 1) {
-            print("| ${i + 1} ".padEnd(5))
+//add coins in boxes
+fun listAllCoins(coinList: List<String>) {
+    for (i in 0..coinList.size - 1) {
+        if (coinList[i] != EMPTY) {
+            println(coinList[i].padEnd(0))
+            println("Cage ${i + 1}")
         }
-        println("|")
-        println("+----".repeat(20) + "+")
-        for (i in 0..cageList.size - 1) {
-            print("| ${cageList[i]} ".padEnd(5))
-        }
-        println("|")
-        println("-----".repeat(20) + "+")
     }
+}
+
+
+fun printGameBox(coinList: List<String>) {
+
+    println("-----".repeat(20) + "+")
+    for (i in 0..coinList.size - 1) {
+        print("| ${i + 1} ".padEnd(5))
+    }
+    println("|")
+    println("+----".repeat(20) + "+")
+    for (i in 0..coinList.size - 1) {
+        print("| ${coinList[i]} ".padEnd(5))
+    }
+    println("|")
+    println("-----".repeat(20) + "+")
+}
+
+
+
+
 
 
 
