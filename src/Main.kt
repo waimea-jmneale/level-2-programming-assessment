@@ -77,7 +77,6 @@ fun listAllCoins(coinList: List<String>) {
     for (i in 0..coinList.size - 1) {
         if (coinList[i] != EMPTY) {
             println(coinList[i].padEnd(0))
-            println("Cage ${i + 1}")
         }
     }
 }

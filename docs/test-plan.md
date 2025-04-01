@@ -10,7 +10,21 @@ Terminology:
 
 ---
 
-## Example Test Name
+## The users can input their names.
+
+The users can input their names as player 1 and 2 and the game will recognize this.
+
+### Test Data To Use
+
+This was selected as it is needed to identify the players and give them their own inputs for when it is their turn.
+
+### Expected Test Result
+
+The code should recognize player 1 and 2 with the names that they chose for the rest of the game. Should print their names when they input it into the code.
+
+---
+
+## Coin randomizing
 
 Example test description. Example test description. Example test description. Example test description. Example test description. Example test description.
 
@@ -24,7 +38,7 @@ Statement detailing what should happen. Statement detailing what should happen. 
 
 ---
 
-## Example Test Name
+## ....
 
 Example test description. Example test description. Example test description. Example test description. Example test description. Example test description.
 
@@ -34,7 +48,7 @@ Details of test data and reasons for selection. Details of test data and reasons
 
 ### Expected Test Result
 
-Statement detailing what should happen. Statement detailing what should happen. Statement detailing what should happen. Statement detailing what should happen. 
+Statement detailing what should happen. Statement detailing what should happen. Statement detailing what should happen. Statement detailing what should happen.
 
 ---
 
