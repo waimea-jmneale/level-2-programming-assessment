@@ -36,20 +36,20 @@ fun main() {
     println("$player2, you are player 2")
     println()
 
-    val coins = setupBoard()
 
 
     //-------------------------------------------------
 
-    coins.add("C")
-    coins.add("C")
-    coins.add("C")
-    coins.add("C")
-    coins.add("C")
+    val coins = setupBoard()
+
+    coins.add("C1")
+    coins.add("C2")
+    coins.add("C3")
+    coins.add("C4")
+    coins.add("C5")
     coins.add("G")
 
     showCoins(coins)
-    println((coins))
 
     listAllCoins(coins)
     coins.shuffle()
@@ -57,7 +57,12 @@ fun main() {
     printGameBox(coins)
     println()
 
-
+    println()
+    println("$player1, choose a coin to move left:")
+    val choice = readln()
+    if (choice != "C1") {
+        
+    }
 
 }
 //
@@ -74,7 +79,7 @@ fun showCoins(coinList: List<String>) {
 
 //add coins in boxes
 fun listAllCoins(coinList: List<String>) {
-    for (i in 0..coinList.size - 1) {
+    for (i in 0..coinList.size -1 ) {
         if (coinList[i] != EMPTY) {
             println(coinList[i].padEnd(0))
         }
@@ -95,7 +100,10 @@ fun printGameBox(coinList: List<String>) {
     }
     println("|")
     println("-----".repeat(20) + "+")
+
 }
+
+
 
 
 
