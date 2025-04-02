@@ -59,9 +59,10 @@ fun main() {
 
     println()
     println("$player1, choose a coin to move left:")
-    val choice = readln()
-    if (choice != "C1") {
-        
+    var choice = readln()
+    if (choice != "$coins") {
+
+
     }
 
 }
