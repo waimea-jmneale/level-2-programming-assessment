@@ -19,7 +19,6 @@ const val NUMSQUARE = 20 // Number of squares
 fun main() {
 
 
-
     println("-------------------------------------------------------------")
     println("Welcome to the Old Gold Game!")
     println("-------------------------------------------------------------")
@@ -27,17 +26,6 @@ fun main() {
     println("where the aim is to win by being the player who removes the gold coin.")
     println("-------------------------------------------------------------")
     println()
-
-    println("Player 1, please enter your name!")
-    val player1 = readln()
-    println("$player1, you are player 1")
-    println()
-
-    println("Player 2, please enter your name!")
-    val player2 = readln()
-    println("$player2, you are player 2")
-    println()
-
 
 
     //-------------------------------------------------
@@ -65,18 +53,18 @@ fun main() {
 
     //----------------------------------------
 
-    println("$player1, please choose a coin to move.")
-
-    val player1Input = readln()
-    if (player1Input == "C1" + "C2" + "C3" + "C4" + "C5") {
-        printGameBox(coins)
-    }
+    moveCoins(coins)
+    println()
 
 
     //----------------------------------------
 
 
-    }
+}
+
+
+
+}
 
 
 //
@@ -117,14 +105,58 @@ fun printGameBox(coinList: List<String>) {
 
 }
 
-fun swapCoins(coinList: MutableList<String>, cageNum1: Int, cageNum2: Int) {
-    println("<-> Swapping cages $cageNum1 and $cageNum2")
+fun moveCoins(cageList: MutableList<String>, cageNum1: Int, cageNum2: Int) {
 
-    val swap = coinList[cageNum1 - 1]
-    coinList[cageNum1 - 1] = coinList[cageNum2 - 1]
-    coinList[cageNum2 - 1] = swap
+    println("Enter the name of Player 1:")
+    val player1 = readLine() ?: "Player 1" // Ensure this line is present
+    println("Enter the name of Player 2:")
+    val player2 = readLine() ?: "Player 2"
+
+    // Alternate turns between players
+    var currentPlayer = player1
+    var turn = 1
+
+    while (true) {
+        // Get user input for cage numbers
+        println("$currentPlayer's turn. Enter the number of the first cage to swap:")
+        val input1 = readLine()
+        println("$currentPlayer's turn. Enter the number of the second cage to swap:")
+        val input2 = readLine()
+
+        // Convert input to integers and handle possible null values
+        val cageNum1 = input1?.toIntOrNull()
+        val cageNum2 = input2?.toIntOrNull()
+
+        // Check if the input is valid
+        if (cageNum1 != null && cageNum2 != null && cageNum1 in 1..cageList.size && cageNum2 in 1..cageList.size) {
+            moveCoins(cageList, cageNum1, cageNum2)
+            println("Updated cages: $cageList")
+        } else {
+            println("Invalid input. Please enter valid cage numbers.")
+            continue // Skip to the next iteration if input is invalid
+        }
+
+        // Switch players
+        currentPlayer = if (currentPlayer == player1) player2 else player1
+        turn++
+    }
 }
 
+
+//removing last coin
+//fun deleteLastMonkey(monkeyList: MutableList<String>) {
+//    // Remove the last one from the list
+//    monkeyList.removeAt(4)
+//    // Show some feedback
+//    println("Removing monkey: $monkeyList ")
+//}
+
+//part 2
+//fun clearCage(cageList: MutableList<String>, cageNum: Int) {
+//    println("--- Clearing cage $cageNum")
+//
+//    cageList[cageNum - 1] = EMPTY
+//}
 
 
 
