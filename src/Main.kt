@@ -1,3 +1,5 @@
+import com.sun.tools.javac.jvm.ByteCodes.swap as swap1
+
 /**
  * =====================================================================
  * Programming Project for NCEA Level 2, Standard 91896
@@ -51,21 +53,32 @@ fun main() {
 
     showCoins(coins)
 
+    //----------------------------------------
+
     listAllCoins(coins)
     coins.shuffle()
+
+    //----------------------------------------
 
     printGameBox(coins)
     println()
 
-    println()
-    println("$player1, choose a coin to move left:")
-    var choice = readln()
-    if (choice != "$coins") {
+    //----------------------------------------
+
+    println("$player1, please choose a coin to move.")
+
+    val player1Input = readln()
+    if (player1Input == "C1" + "C2" + "C3" + "C4" + "C5") {
+        printGameBox(coins)
+    }
+
+
+    //----------------------------------------
 
 
     }
 
-}
+
 //
 fun setupBoard(): MutableList<String> {
     val squareList = mutableListOf<String>()
@@ -103,6 +116,16 @@ fun printGameBox(coinList: List<String>) {
     println("-----".repeat(20) + "+")
 
 }
+
+fun swapCoins(coinList: MutableList<String>, cageNum1: Int, cageNum2: Int) {
+    println("<-> Swapping cages $cageNum1 and $cageNum2")
+
+    val swap = coinList[cageNum1 - 1]
+    coinList[cageNum1 - 1] = coinList[cageNum2 - 1]
+    coinList[cageNum2 - 1] = swap
+}
+
+
 
 
 
