@@ -25,12 +25,13 @@ fun main() {
     println("RULES:")
     println("You cannot move the coins right, only left!")
     println("You cannot jump other coins!")
-    println("You can move as far left as you can as long as you dont jump!")
+    println("You can move as far left as you can as long as you don't jump!")
     println("You win if you get the gold coin into the first square!")
+    println("You can remove the normal coins if they are in the first box by inputing 0 when choosing your coin!")
     println("-------------------------------------------------------------")
     println()
 
-    //get player 1s and 2s names
+    // Get player 1's and 2's names
     println("Player 1, please enter your name:")
     val player1 = readln()
     println("Player 1 is $player1")
@@ -41,7 +42,7 @@ fun main() {
     println("Player 2 is $player2")
     println()
 
-    //coins in the game
+    // Coins in the game
     val coins = setupBoard()
     coins.add("C1")
     coins.add("C2")
@@ -50,43 +51,55 @@ fun main() {
     coins.add("C5")
     coins.add("G")
 
-    //shuffle coins in the game board
+    // Shuffle coins in the game board
     showCoins(coins)
     coins.shuffle()
 
-    //prints the game box
+    // Prints the game box
     printGameBox(coins)
     println()
 
     var currentPlayer = player1
     while (true) {
-        println("$currentPlayer's turn. Please enter the box number with the coin you want to move in it: (1-${coins.size}):")
-        val coinIndex = readln().toIntOrNull()?.minus(1) ?: continue
+        println("$currentPlayer's turn. Please enter the box number with the coin you want to move in it: (1-${coins.size}) or enter '0' to remove the coin in box 1:")
+        val coinInput = readln()
 
-        if (coinIndex < 0 || coinIndex >= coins.size || coins[coinIndex] == EMPTY) {
-            println("There is no coin in this box. Please choose another.")
-            continue
+        // Check if the input is "0" to remove the coin in box 1
+        if (coinInput == "0") {
+            if (coins[0] != EMPTY) {
+                println("Removing ${coins[0]} from box 1.")
+                coins[0] = EMPTY
+                printGameBox(coins)
+                println()
+            } else {
+                println("There is no coin in box 1 to remove.")
+            }
+        } else {
+            val coinIndex = coinInput.toIntOrNull()?.minus(1) ?: continue
+
+            if (coinIndex < 0 || coinIndex >= coins.size || coins[coinIndex] == EMPTY) {
+                println("There is no coin in this box. Please choose another.")
+                continue
+            }
+
+            println("Please enter the box you want to move this coin to: (1-${coins.size}):")
+            val newPosition = readln().toIntOrNull()?.minus(1) ?: continue
+
+            if (newPosition < 0 || newPosition >= coins.size || coins[newPosition] != EMPTY) {
+                println("Cannot move here. The square you chose is either out of bounds or not empty. Please try again.")
+                continue
+            }
+
+            // Move the coin
+            coins[newPosition] = coins[coinIndex]
+            coins[coinIndex] = EMPTY
+
+            printGameBox(coins)
+            println()
         }
-
-        println("Please enter the box you want to move this coin to: (1-${coins.size}):")
-        val newPosition = readln().toIntOrNull()?.minus(1) ?: continue
-
-
-        if (newPosition < 0 || newPosition >= coins.size || coins[newPosition] != EMPTY) {
-            println("Cannot move here. The square you chose is either out of bounds or not empty. Please try again.")
-            continue
-        }
-
-        // Move the coin
-        coins[newPosition] = coins[coinIndex]
-        coins[coinIndex] = EMPTY
-
-        printGameBox(coins)
-        println()
 
         // Check for win condition (if the gold coin is removed at sq1)
-        val firstSquare = (0)
-        if (coins[firstSquare] == "G") {
+        if (coins[0] == "G") {
             println("$currentPlayer has removed the gold coin! $currentPlayer wins!")
             break
         }
@@ -95,6 +108,7 @@ fun main() {
         currentPlayer = if (currentPlayer == player1) player2 else player1
     }
 }
+
 
 fun setupBoard(): MutableList<String> {
     val squareList = mutableListOf<String>()
