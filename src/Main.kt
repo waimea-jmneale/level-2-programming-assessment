@@ -12,26 +12,37 @@ import com.sun.tools.javac.jvm.ByteCodes.swap as swap1
  * Old Gold is a two-player game, played on a one-dimensional grid with coins, where the aim is to win by being the player who **removes the gold coin**.
  * =====================================================================
  */
-
 const val EMPTY = " "     // Represents an empty square
 const val NUMSQUARE = 20 // Number of squares
 
 fun main() {
-
-
     println("-------------------------------------------------------------")
     println("Welcome to the Old Gold Game!")
     println("-------------------------------------------------------------")
     println("Old Gold is a two-player game, played on a one-dimensional grid with coins,")
-    println("where the aim is to win by being the player who removes the gold coin.")
+    println("where the aim is to win by being the player who gets the gold coin in the first square.")
+    println("-------------------------------------------------------------")
+    println("RULES:")
+    println("You cannot move the coins right, only left!")
+    println("You cannot jump other coins!")
+    println("You can move as far left as you can as long as you dont jump!")
+    println("You win if you get the gold coin into the first square!")
     println("-------------------------------------------------------------")
     println()
 
+    //get player 1s and 2s names
+    println("Player 1, please enter your name:")
+    val player1 = readln()
+    println("Player 1 is $player1")
+    println()
 
-    //-------------------------------------------------
+    println("Player 2, please enter your name:")
+    val player2 = readln()
+    println("Player 2 is $player2")
+    println()
 
+    //coins in the game
     val coins = setupBoard()
-
     coins.add("C1")
     coins.add("C2")
     coins.add("C3")
@@ -39,108 +50,182 @@ fun main() {
     coins.add("C5")
     coins.add("G")
 
+    //shuffle coins in the game board
     showCoins(coins)
-
-    //----------------------------------------
-
-    listAllCoins(coins)
     coins.shuffle()
 
-    //----------------------------------------
-
+    //prints the game box
     printGameBox(coins)
     println()
 
-    //----------------------------------------
+    var currentPlayer = player1
+    while (true) {
+        println("$currentPlayer's turn. Please enter the box number with the coin you want to move in it: (1-${coins.size}):")
+        val coinIndex = readln().toIntOrNull()?.minus(1) ?: continue
 
-    moveCoins(coins)
-    println()
+        if (coinIndex < 0 || coinIndex >= coins.size || coins[coinIndex] == EMPTY) {
+            println("There is no coin in this box. Please choose another.")
+            continue
+        }
+
+        println("Please enter the box you want to move this coin to: (1-${coins.size}):")
+        val newPosition = readln().toIntOrNull()?.minus(1) ?: continue
 
 
-    //----------------------------------------
+        if (newPosition < 0 || newPosition >= coins.size || coins[newPosition] != EMPTY) {
+            println("Cannot move here. The square you chose is either out of bounds or not empty. Please try again.")
+            continue
+        }
 
+        // Move the coin
+        coins[newPosition] = coins[coinIndex]
+        coins[coinIndex] = EMPTY
 
+        printGameBox(coins)
+        println()
+
+        // Check for win condition (if the gold coin is removed at sq1)
+        val firstSquare = (0)
+        if (coins[firstSquare] == "G") {
+            println("$currentPlayer has removed the gold coin! $currentPlayer wins!")
+            break
+        }
+
+        // Switch players
+        currentPlayer = if (currentPlayer == player1) player2 else player1
+    }
 }
 
-
-
-}
-
-
-//
 fun setupBoard(): MutableList<String> {
     val squareList = mutableListOf<String>()
     for (i in 1..NUMSQUARE - 6) squareList.add(EMPTY)
     return squareList
 }
-//Show the players the coins they're playing with
+
+// Show the players the coins they're playing with
 fun showCoins(coinList: List<String>) {
     println("List of the coins | 5 Normal and 1 gold")
     println("------------------------------------")
 }
 
-//add coins in boxes
+// Add coins in boxes
 fun listAllCoins(coinList: List<String>) {
-    for (i in 0..coinList.size -1 ) {
+    for (i in 0 until coinList.size) {
         if (coinList[i] != EMPTY) {
             println(coinList[i].padEnd(0))
         }
     }
 }
 
-
 fun printGameBox(coinList: List<String>) {
-
     println("-----".repeat(20) + "+")
-    for (i in 0..coinList.size - 1) {
+    for (i in 0 until coinList.size) {
         print("| ${i + 1} ".padEnd(5))
     }
     println("|")
     println("+----".repeat(20) + "+")
-    for (i in 0..coinList.size - 1) {
+    for (i in 0 until coinList.size) {
         print("| ${coinList[i]} ".padEnd(5))
     }
     println("|")
     println("-----".repeat(20) + "+")
-
 }
 
-fun moveCoins(cageList: MutableList<String>, cageNum1: Int, cageNum2: Int) {
 
-    println("Enter the name of Player 1:")
-    val player1 = readLine() ?: "Player 1" // Ensure this line is present
-    println("Enter the name of Player 2:")
-    val player2 = readLine() ?: "Player 2"
+//const val EMPTY = " "     // Represents an empty square
+//const val NUMSQUARE = 20 // Number of squares
+//
+//fun main() {
+//
+//
+//    println("-------------------------------------------------------------")
+//    println("Welcome to the Old Gold Game!")
+//    println("-------------------------------------------------------------")
+//    println("Old Gold is a two-player game, played on a one-dimensional grid with coins,")
+//    println("where the aim is to win by being the player who removes the gold coin.")
+//    println("-------------------------------------------------------------")
+//    println()
+//
+//    println("Player 1, please enter your name:")
+//    val player1 = readln()
+//    println("Player 1 is $player1")
+//    println()
+//
+//    println("Player 2, please enter your name:")
+//    val player2 = readln()
+//    println("Player 2 is $player2")
+//    println()
+//
+//    //-------------------------------------------------
+//
+//    val coins = setupBoard()
+//
+//    coins.add("C1")
+//    coins.add("C2")
+//    coins.add("C3")
+//    coins.add("C4")
+//    coins.add("C5")
+//    coins.add("G")
+//
+//    showCoins(coins)
+//
+//    //----------------------------------------
+//
+//    listAllCoins(coins)
+//    coins.shuffle()
+//
+//    //----------------------------------------
+//
+//    printGameBox(coins)
+//    println()
+//
+//    //----------------------------------------
+//
+//
+//
+//    //----------------------------------------
+//
+//
+//}
+////
+//fun setupBoard(): MutableList<String> {
+//    val squareList = mutableListOf<String>()
+//    for (i in 1..NUMSQUARE - 6) squareList.add(EMPTY)
+//    return squareList
+//}
+////Show the players the coins they're playing with
+//fun showCoins(coinList: List<String>) {
+//    println("List of the coins | 5 Normal and 1 gold")
+//    println("------------------------------------")
+//}
+//
+////add coins in boxes
+//fun listAllCoins(coinList: List<String>) {
+//    for (i in 0..coinList.size -1 ) {
+//        if (coinList[i] != EMPTY) {
+//            println(coinList[i].padEnd(0))
+//        }
+//    }
+//}
+//
+//
+//fun printGameBox(coinList: List<String>) {
+//
+//    println("-----".repeat(20) + "+")
+//    for (i in 0..coinList.size - 1) {
+//        print("| ${i + 1} ".padEnd(5))
+//    }
+//    println("|")
+//    println("+----".repeat(20) + "+")
+//    for (i in 0..coinList.size - 1) {
+//        print("| ${coinList[i]} ".padEnd(5))
+//    }
+//    println("|")
+//    println("-----".repeat(20) + "+")
+//
+//}
 
-    // Alternate turns between players
-    var currentPlayer = player1
-    var turn = 1
 
-    while (true) {
-        // Get user input for cage numbers
-        println("$currentPlayer's turn. Enter the number of the first cage to swap:")
-        val input1 = readLine()
-        println("$currentPlayer's turn. Enter the number of the second cage to swap:")
-        val input2 = readLine()
-
-        // Convert input to integers and handle possible null values
-        val cageNum1 = input1?.toIntOrNull()
-        val cageNum2 = input2?.toIntOrNull()
-
-        // Check if the input is valid
-        if (cageNum1 != null && cageNum2 != null && cageNum1 in 1..cageList.size && cageNum2 in 1..cageList.size) {
-            moveCoins(cageList, cageNum1, cageNum2)
-            println("Updated cages: $cageList")
-        } else {
-            println("Invalid input. Please enter valid cage numbers.")
-            continue // Skip to the next iteration if input is invalid
-        }
-
-        // Switch players
-        currentPlayer = if (currentPlayer == player1) player2 else player1
-        turn++
-    }
-}
 
 
 //removing last coin
