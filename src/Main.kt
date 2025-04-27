@@ -27,7 +27,7 @@ fun main() {
     println("You cannot jump other coins!")
     println("You can move as far left as you can as long as you don't jump!")
     println("You win if you get the gold coin into the first square!")
-    println("You can remove the normal coins if they are in the first box by inputing 0 when choosing your coin!")
+    println("You can remove the normal coins if they are in the first box by inputting 0 when choosing your coin!")
     println("-------------------------------------------------------------")
     println()
 
