@@ -22,6 +22,7 @@ This was selected as it is needed to identify the players and give them their ow
 
 The code should recognize player 1 and 2 with the names that they chose for the rest of the game. Should print their names when they input it into the code.
 
+
 ---
 
 ## Coin randomizing
