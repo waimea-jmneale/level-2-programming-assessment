@@ -25,31 +25,31 @@ The code should recognize player 1 and 2 with the names that they chose for the 
 
 ---
 
-## Coin randomizing
+## Board input
 
-Example test description. Example test description. Example test description. Example test description. Example test description. Example test description.
+The code should lay out a board that is easy to read that also follows the players inputs after each turn.
 
 ### Test Data To Use
 
-Details of test data and reasons for selection. Details of test data and reasons for selection. Details of test data and reasons for selection.
+This was chosen so that the players would have a board to play on that was easy to read.
 
 ### Expected Test Result
 
-Statement detailing what should happen. Statement detailing what should happen. Statement detailing what should happen. Statement detailing what should happen. 
+This should print out a board for the players to play on after they input their names.
 
 ---
 
-## ....
+## Player moves and Turns
 
-Example test description. Example test description. Example test description. Example test description. Example test description. Example test description.
+The game should cycle the players turns and input their moves when made.
 
 ### Test Data To Use
 
-Details of test data and reasons for selection. Details of test data and reasons for selection. Details of test data and reasons for selection.
+I chose this so I can confirm that players would have turn after turn with it cycling.
 
 ### Expected Test Result
 
-Statement detailing what should happen. Statement detailing what should happen. Statement detailing what should happen. Statement detailing what should happen.
+The game should pick up one players move then give the other player a chance to move.
 
 ---
 
