@@ -59,6 +59,7 @@ fun main() {
     printGameBox(coins)
     println()
 
+    // Tells the user what they can do
     var currentPlayer = player1
     while (true) {
         println("$currentPlayer's turn. Please enter the box number with the coin you want to move in it: (1-${coins.size}) or enter '0' to remove the coin in box 1:")
@@ -109,7 +110,7 @@ fun main() {
     }
 }
 
-
+// Open board
 fun setupBoard(): MutableList<String> {
     val squareList = mutableListOf<String>()
     for (i in 1..NUMSQUARE - 6) squareList.add(EMPTY)
@@ -130,7 +131,7 @@ fun listAllCoins(coinList: List<String>) {
         }
     }
 }
-
+// Print board
 fun printGameBox(coinList: List<String>) {
     println("-----".repeat(20) + "+")
     for (i in 0 until coinList.size) {
